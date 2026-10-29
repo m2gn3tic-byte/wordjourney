@@ -1,0 +1,20 @@
+Sõnarännak 0.3.0 — 148 taset, kolm mänguviisi
+
+ANDROIDIS PROOVIMINE
+1. Laadi sonarannak-debug.apk telefoni.
+2. Ava APK ja luba vajaduse korral selle allika rakenduste paigaldamine.
+3. Ava Sõnarännak. Mäng on APK sees ja töötab võrguühenduseta.
+Android 7.0 või uuem. See on prooviallkirjaga arendusehitus, mitte Play poest paigaldatud väljalase.
+
+BRAUSERIS PROOVIMINE
+Paki ZIP lahti ja ava Sonarannak.html oma arvuti brauseris.
+Veebilehe aadress pärast GitHub Pagesi aktiveerimist:
+https://m2gn3tic-byte.github.io/wordjourney/
+Pagesi allikaks vali wordjourney hoidla seadetes gh-pages ja /(root).
+
+GOOGLE PLAY
+sonarannak-unsigned.aab vajab enne üleslaadimist omaniku väljalaske allkirja.
+See ei ole telefonis otse paigaldatav APK. Ära kasuta debug-võtit Play väljalaskeks.
+
+Mündipoes on ainult tasuta näidisostud. Pärisraha makseid pole ühendatud.
+Edenemine säilib seadme või brauseri kohalikus salvestuses; veeb ja APK ei sünkrooni omavahel.
