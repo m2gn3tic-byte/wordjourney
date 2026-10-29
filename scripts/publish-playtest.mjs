@@ -19,6 +19,13 @@ for(const name of packages){
   await copyFile(join(artifacts,name),join(download,name));
   hashes[name]=createHash('sha256').update(await readFile(join(download,name))).digest('hex');
 }
+await mkdir(join(download,'screenshots'),{recursive:true});
+for(const name of ['sonarannak-1080x1920.png','sonarannak-wordsearch-1080x1920.png']){
+  const png=await readFile(join(artifacts,name));
+  if(png.readUInt32BE(16)!==1080||png.readUInt32BE(20)!==1920)throw Error(`Screenshot has incorrect dimensions: ${name}`);
+  await copyFile(join(artifacts,name),join(download,'screenshots',name));
+  hashes[`screenshots/${name}`]=createHash('sha256').update(png).digest('hex');
+}
 await writeFile(join(download,'SHA256.json'),JSON.stringify(hashes,null,2)+'\n');
 await writeFile(join(download,'ALUSTA-SIIT.txt'),`Sõnarännak 0.3.0 — 148 taset, kolm mänguviisi\n\nANDROIDIS PROOVIMINE\n1. Laadi sonarannak-debug.apk telefoni.\n2. Ava APK ja luba vajaduse korral selle allika rakenduste paigaldamine.\n3. Ava Sõnarännak. Mäng on APK sees ja töötab võrguühenduseta.\nAndroid 7.0 või uuem. See on prooviallkirjaga arendusehitus, mitte Play poest paigaldatud väljalase.\n\nBRAUSERIS PROOVIMINE\nPaki ZIP lahti ja ava Sonarannak.html oma arvuti brauseris.\nVeebilehe aadress pärast GitHub Pagesi aktiveerimist:\nhttps://m2gn3tic-byte.github.io/wordjourney/\nPagesi allikaks vali wordjourney hoidla seadetes gh-pages ja /(root).\n\nGOOGLE PLAY\nsonarannak-unsigned.aab vajab enne üleslaadimist omaniku väljalaske allkirja.\nSee ei ole telefonis otse paigaldatav APK. Ära kasuta debug-võtit Play väljalaskeks.\n\nMündipoes on ainult tasuta näidisostud. Pärisraha makseid pole ühendatud.\nEdenemine säilib seadme või brauseri kohalikus salvestuses; veeb ja APK ei sünkrooni omavahel.\n`);
 await writeFile(join(web,'.nojekyll'),'');
@@ -49,7 +56,7 @@ async function snapshot(branch,directory,{source=false}={}){
     if(parent&&git(['rev-parse',`${parent}^{tree}`])===tree)commit=parent;
     else commit=git(['commit-tree',tree,...(parent?['-p',parent]:[])],{input:`Sõnarännak 0.3.0: ${branch}\n`});
     let old='0000000000000000000000000000000000000000';
-    try{old=git(['rev-parse','--verify',ref]);}catch{}
+    try{old=git(['rev-parse','--verify','--quiet',ref],{stdio:['ignore','pipe','ignore']});}catch{}
     git(['update-ref',ref,commit,old]);
     console.log(`${branch}: ${commit}`);return ref;
   }finally{await rm(temp,{recursive:true,force:true});}
