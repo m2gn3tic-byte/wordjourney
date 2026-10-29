@@ -1,0 +1,7 @@
+{
+  "appId": "ee.sonarannak.game",
+  "appName": "Sõnarännak",
+  "webDir": "dist",
+  "android": { "adjustMarginsForEdgeToEdge": "auto" },
+  "server": { "androidScheme": "https" }
+}

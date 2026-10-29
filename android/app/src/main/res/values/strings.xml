@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Sõnarännak</string>
+    <string name="title_activity_main">Sõnarännak</string>
+    <string name="package_name">ee.sonarannak.game</string>
+    <string name="custom_url_scheme">ee.sonarannak.game</string>
+</resources>

@@ -1,0 +1,16 @@
+node_modules/
+dist/
+dist-pages/
+artifacts/
+playwright-report/
+test-results/
+.vite/
+.DS_Store
+.env*
+!.env.example
+android/.gradle/
+android/local.properties
+android/**/build/
+android/.idea/
+*.jks
+*.keystore
